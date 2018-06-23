@@ -15,7 +15,7 @@ dist: clean-dist
 	python setup.py sdist
 	ls -ls dist
 
-release: dist
+release: test dist
 	$(VENV_ACTIVATE); twine upload dist/*
 
 bump: $(VENV)

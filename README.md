@@ -1,7 +1,10 @@
-[![Build Status](https://travis-ci.org/pglass/py-openapi-schema-to-json-schema.svg?branch=master)](https://travis-ci.org/pglass/py-openapi-schema-to-json-schema)
-
 Overview
 --------
+
+[![Build Status](https://travis-ci.org/pglass/py-openapi-schema-to-json-schema.svg?branch=master)](https://travis-ci.org/pglass/py-openapi-schema-to-json-schema)
+[![PyPI](https://img.shields.io/pypi/v/py-openapi-schema-to-json-schema.svg)](https://pypi.org/project/py-openapi-schema-to-json-schema/)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/py-openapi-schema-to-json-schema.svg)](https://pypi.org/project/py-openapi-schema-to-json-schema/)
+
 
 **This is a straight Python port of the MIT-licensed
 [mikunn/openapi-schema-to-json-schema](https://github.com/mikunn/openapi-schema-to-json-schema)
