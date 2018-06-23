@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/pglass/py-openapi-schema-to-json-schema.svg?branch=master)](https://travis-ci.org/pglass/py-openapi-schema-to-json-schema)
+
 Overview
 --------
 
