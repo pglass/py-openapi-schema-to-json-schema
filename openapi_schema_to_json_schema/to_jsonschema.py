@@ -1,4 +1,4 @@
-import json
+import copy
 
 
 class InvalidTypeError(ValueError):
@@ -17,7 +17,9 @@ def convert(schema, options=None):
     options = options or {}
     options['dateToDateTime'] = options.get('dateToDateTime', False)
     options['cloneSchema'] = options.get('cloneSchema', True)
-    options['supportPatternProperties'] = options.get('supportPatternProperties', False)
+    options['supportPatternProperties'] = options.get(
+        'supportPatternProperties', False
+    )
     options['keepNotSupported'] = options.get('keepNotSupported', [])
 
     if not callable(options.get('patternPropertiesHandler')):
@@ -39,7 +41,7 @@ def convert(schema, options=None):
     )
 
     if options['cloneSchema']:
-        schema = json.loads(json.dumps(schema))
+        schema = copy.deepcopy(schema)
 
     schema = convertSchema(schema, options)
     schema['$schema'] = 'http://json-schema.org/draft-04/schema#'
@@ -62,7 +64,8 @@ def convertSchema(schema, options):
         schema['properties'] = convertProperties(schema['properties'], options)
 
         if isinstance(schema.get('required'), list):
-            schema['required'] = cleanRequired(schema['required'], schema['properties'])
+            schema['required'] = cleanRequired(schema['required'],
+                                               schema['properties'])
 
             if len(schema['required']) == 0:
                 del schema['required']
@@ -75,7 +78,8 @@ def convertSchema(schema, options):
 
     if (isinstance(schema.get('x-patternProperties'), dict)
             and options['supportPatternProperties']):
-        schema = convertPatternProperties(schema, options['patternPropertiesHandler'])
+        schema = convertPatternProperties(schema,
+                                          options['patternPropertiesHandler'])
 
     for unsupported in notSupported:
         try:

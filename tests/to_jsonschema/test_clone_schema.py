@@ -1,4 +1,4 @@
-from openapi_jsonschema_converter import openapi_to_json_schema as convert
+from openapi_schema_to_json_schema import to_json_schema as convert
 
 
 def test_clone_schema_by_default():
@@ -12,7 +12,6 @@ def test_clone_schema_by_default():
         '$schema': 'http://json-schema.org/draft-04/schema#',
         'type': ['string', 'null'],
     }
-
     assert result == expected
     assert schema is not result
 
@@ -28,7 +27,6 @@ def test_clone_schema_true():
         '$schema': 'http://json-schema.org/draft-04/schema#',
         'type': ['string', 'null'],
     }
-
     assert result == expected
     assert schema is not result
 
@@ -44,7 +42,6 @@ def test_clone_schema_false():
         '$schema': 'http://json-schema.org/draft-04/schema#',
         'type': ['string', 'null'],
     }
-
     assert schema == expected
     assert result == expected
     assert schema is result
