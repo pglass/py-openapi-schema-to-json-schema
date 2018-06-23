@@ -1,4 +1,4 @@
-from openapi_jsonschema_converter import openapi_to_json_schema as convert
+from openapi_schema_to_json_schema import to_json_schema as convert
 from tests.to_jsonschema.utils import get_schema_file
 
 

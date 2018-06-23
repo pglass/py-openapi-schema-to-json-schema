@@ -1,4 +1,4 @@
-from openapi_jsonschema_converter import openapi_to_json_schema as convert
+from openapi_schema_to_json_schema import to_json_schema as convert
 
 
 def test_plain_string_is_untouched():
