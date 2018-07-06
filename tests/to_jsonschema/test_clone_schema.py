@@ -45,3 +45,49 @@ def test_clone_schema_false():
     assert schema == expected
     assert result == expected
     assert schema is result
+
+
+def test_clone_schema_with_duplicate_references():
+    dupe = {
+        "oneOf": [
+            {
+                "type": "string",
+                "example": "cidr",
+                "nullable": True,
+            },
+            {
+                "type": "string",
+                "enum": ["alias", "policy"]
+            }
+        ]
+    }
+    schema = {
+        "type": "object",
+        "properties": {
+            "first": dupe,
+            "second": dupe,
+        }
+    }
+    result = convert(schema)
+    expected = {
+        '$schema': 'http://json-schema.org/draft-04/schema#',
+        "type": "object",
+        "properties": {
+            "first": {
+                "oneOf": [
+                    {"type": ["string", "null"]},
+                    {"type": "string", "enum": ["alias", "policy"]},
+                ],
+            },
+            "second": {
+                "oneOf": [
+                    {"type": ["string", "null"]},
+                    {"type": "string", "enum": ["alias", "policy"]},
+                ],
+            },
+        }
+    }
+
+    assert schema is not result
+    assert result == expected
+    assert result['properties']['first'] is not result['properties']['second']
