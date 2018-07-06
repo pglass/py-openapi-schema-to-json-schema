@@ -1,4 +1,4 @@
-import copy
+import json
 
 
 class InvalidTypeError(ValueError):
@@ -41,7 +41,7 @@ def convert(schema, options=None):
     )
 
     if options['cloneSchema']:
-        schema = copy.deepcopy(schema)
+        schema = json.loads(json.dumps(schema))
 
     schema = convertSchema(schema, options)
     schema['$schema'] = 'http://json-schema.org/draft-04/schema#'
