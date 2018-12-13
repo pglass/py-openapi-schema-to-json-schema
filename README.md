@@ -11,7 +11,7 @@ Overview
 ([v2.1.0](https://github.com/mikunn/openapi-schema-to-json-schema/tree/v2.1.0))**.
 This port is similarly MIT-licensed.
 
-It converts from converts from [OpenAPI 3.0](
+It converts from [OpenAPI 3.0](
 https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md) to
 [JSON Schema Draft 4](http://json-schema.org/specification-links.html#draft-4).
 
@@ -211,6 +211,6 @@ Credits
 
 - [mikunn](https://github.com/mikunn) for the [original
 openapi-schema-to-json-schema](https://github.com/mikunn/openapi-schema-to-json-schema)
-- [Phil Sturgeon](https://github.com/philsturgeon) for his great blog post
+- [Phil Sturgeon](https://github.com/philsturgeon) for his great 
 [blog post](https://philsturgeon.uk/api/2018/03/30/openapi-and-json-schema-divergence/)
 about the issue (and his [reverse implementation](https://github.com/wework/json-schema-to-openapi-schema))
