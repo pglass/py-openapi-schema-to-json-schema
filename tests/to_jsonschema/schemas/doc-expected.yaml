@@ -1,0 +1,5599 @@
+openapi: 3.0.3
+info:
+  title: Django Oscar API
+  version: 0.0.0
+  description: Backend of Oscar API generated with drf-spectacular
+paths:
+  /auth/convert-token/:
+    post:
+      operationId: auth_convert_token_create
+      description: |-
+        Implements an endpoint to convert a provider token to an access token
+
+        The endpoint is used in the following flows:
+
+        * Authorization code
+        * Client credentials
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Unspecified request body
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              description: Unspecified request body
+              additionalProperties: {}
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /auth/invalidate-sessions/:
+    post:
+      operationId: auth_invalidate_sessions_create
+      description: ''
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Unspecified request body
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              description: Unspecified request body
+              additionalProperties: {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /auth/revoke-token/:
+    post:
+      operationId: auth_revoke_token_create
+      description: Implements an endpoint to revoke access or refresh tokens
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Unspecified request body
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              description: Unspecified request body
+              additionalProperties: {}
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /auth/token/:
+    post:
+      operationId: auth_token_create
+      description: |-
+        Implements an endpoint to provide access tokens
+
+        The endpoint is used in the following flows:
+
+        * Authorization code
+        * Password
+        * Client credentials
+      tags:
+      - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Unspecified request body
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              description: Unspecified request body
+              additionalProperties: {}
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /oscarapi/:
+    get:
+      operationId: oscarapi_retrieve
+      description: ''
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /oscarapi/basket/:
+    get:
+      operationId: oscarapi_basket_retrieve
+      description: |-
+        Api for retrieving a user's basket.
+
+        GET:
+        Retrieve your basket.
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+  /oscarapi/basket/add-product/:
+    post:
+      operationId: oscarapi_basket_add_product_create
+      description: |-
+        Add a certain quantity of a product to the basket.
+
+        POST(url, quantity)
+        {
+            "url": "http://testserver.org/oscarapi/products/209/",
+            "quantity": 6
+        }
+
+        If you've got some options to configure for the product to add to the
+        basket, you should pass the optional ``options`` property:
+        {
+            "url": "http://testserver.org/oscarapi/products/209/",
+            "quantity": 6,
+            "options": [{
+                "option": "http://testserver.org/oscarapi/options/1/",
+                "value": "some value"
+            }]
+        }
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddProduct'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AddProduct'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+  /oscarapi/basket/add-product{format}:
+    post:
+      operationId: oscarapi_basket_add_product{format}_create
+      description: |-
+        Add a certain quantity of a product to the basket.
+
+        POST(url, quantity)
+        {
+            "url": "http://testserver.org/oscarapi/products/209/",
+            "quantity": 6
+        }
+
+        If you've got some options to configure for the product to add to the
+        basket, you should pass the optional ``options`` property:
+        {
+            "url": "http://testserver.org/oscarapi/products/209/",
+            "quantity": 6,
+            "options": [{
+                "option": "http://testserver.org/oscarapi/options/1/",
+                "value": "some value"
+            }]
+        }
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddProduct'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AddProduct'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+  /oscarapi/basket/shipping-methods/:
+    get:
+      operationId: oscarapi_basket_shipping_methods_retrieve
+      description: |-
+        Get the available shipping methods and their cost for this order.
+
+        GET:
+        A list of shipping method details and the prices.
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShippingAddress'
+          description: ''
+    post:
+      operationId: oscarapi_basket_shipping_methods_create
+      description: |-
+        GET:
+        Retrieve shipping methods available to the user, basket, request combination
+
+        POST(shipping_address):
+        {
+            "country": "http://127.0.0.1:8000/oscarapi/countries/NL/",
+            "first_name": "Henk",
+            "last_name": "Van den Heuvel",
+            "line1": "Roemerlaan 44",
+            "line2": "",
+            "line3": "",
+            "line4": "Kroekingen",
+            "notes": "Niet STUK MAKEN OK!!!!",
+            "phone_number": "+31 26 370 4887",
+            "postcode": "7777KK",
+            "state": "Gerendrecht",
+            "title": "Mr"
+        }
+
+        Post a shipping_address if your shipping methods are dependent on the
+        address.
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShippingAddress'
+          multipart/form-data:
+            schema:
+              type: [string, 'null']
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShippingAddress'
+          description: ''
+  /oscarapi/basket/shipping-methods{format}:
+    get:
+      operationId: oscarapi_basket_shipping_methods{format}_retrieve
+      description: |-
+        Get the available shipping methods and their cost for this order.
+
+        GET:
+        A list of shipping method details and the prices.
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: [string, 'null']
+          description: ''
+    post:
+      operationId: oscarapi_basket_shipping_methods{format}_create
+      description: |-
+        GET:
+        Retrieve shipping methods available to the user, basket, request combination
+
+        POST(shipping_address):
+        {
+            "country": "http://127.0.0.1:8000/oscarapi/countries/NL/",
+            "first_name": "Henk",
+            "last_name": "Van den Heuvel",
+            "line1": "Roemerlaan 44",
+            "line2": "",
+            "line3": "",
+            "line4": "Kroekingen",
+            "notes": "Niet STUK MAKEN OK!!!!",
+            "phone_number": "+31 26 370 4887",
+            "postcode": "7777KK",
+            "state": "Gerendrecht",
+            "title": "Mr"
+        }
+
+        Post a shipping_address if your shipping methods are dependent on the
+        address.
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: [string, 'null']
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShippingAddress'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/ShippingAddress'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShippingAddress'
+          description: ''
+  /oscarapi/baskets/:
+    get:
+      operationId: oscarapi_baskets_list
+      description: Retrieve all baskets that belong to the current (authenticated)
+        user.
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Basket'
+          description: ''
+  /oscarapi/baskets/{basket_pk}/lines/{line_pk}/lineattributes/{id}/:
+    get:
+      operationId: oscarapi_baskets_lines_lineattributes_retrieve
+      description: ''
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Line attribute.
+        schema:
+          type: integer
+      - name: line_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LineAttribute'
+          description: ''
+    put:
+      operationId: oscarapi_baskets_lines_lineattributes_update
+      description: ''
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Line attribute.
+        schema:
+          type: integer
+      - name: line_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LineAttribute'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LineAttribute'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LineAttribute'
+          description: ''
+    patch:
+      operationId: oscarapi_baskets_lines_lineattributes_partial_update
+      description: ''
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Line attribute.
+        schema:
+          type: integer
+      - name: line_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLineAttribute'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLineAttribute'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LineAttribute'
+          description: ''
+  /oscarapi/baskets/{basket_pk}/lines/{line_pk}/lineattributes/{id}{format}:
+    get:
+      operationId: oscarapi_baskets_lines_lineattributes_retrieve
+      description: ''
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Line attribute.
+        schema:
+          type: integer
+      - name: line_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LineAttribute'
+          description: ''
+    put:
+      operationId: oscarapi_baskets_lines_lineattributes_update
+      description: ''
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Line attribute.
+        schema:
+          type: integer
+      - name: line_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LineAttribute'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/LineAttribute'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LineAttribute'
+          description: ''
+    patch:
+      operationId: oscarapi_baskets_lines_lineattributes_partial_update
+      description: ''
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Line attribute.
+        schema:
+          type: integer
+      - name: line_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLineAttribute'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedLineAttribute'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LineAttribute'
+          description: ''
+  /oscarapi/baskets/{basket_pk}/lines/{id}/:
+    get:
+      operationId: oscarapi_baskets_lines_retrieve
+      description: |-
+        Only the field `quantity` can be changed in this view.
+        All other fields are readonly.
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketLine'
+          description: ''
+    put:
+      operationId: oscarapi_baskets_lines_update
+      description: |-
+        Only the field `quantity` can be changed in this view.
+        All other fields are readonly.
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketLine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketLine'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketLine'
+          description: ''
+    patch:
+      operationId: oscarapi_baskets_lines_partial_update
+      description: |-
+        Only the field `quantity` can be changed in this view.
+        All other fields are readonly.
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBasketLine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBasketLine'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketLine'
+          description: ''
+    delete:
+      operationId: oscarapi_baskets_lines_destroy
+      description: |-
+        Only the field `quantity` can be changed in this view.
+        All other fields are readonly.
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /oscarapi/baskets/{basket_pk}/lines/{id}{format}:
+    get:
+      operationId: oscarapi_baskets_lines_retrieve
+      description: |-
+        Only the field `quantity` can be changed in this view.
+        All other fields are readonly.
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketLine'
+          description: ''
+    put:
+      operationId: oscarapi_baskets_lines_update
+      description: |-
+        Only the field `quantity` can be changed in this view.
+        All other fields are readonly.
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketLine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketLine'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketLine'
+          description: ''
+    patch:
+      operationId: oscarapi_baskets_lines_partial_update
+      description: |-
+        Only the field `quantity` can be changed in this view.
+        All other fields are readonly.
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBasketLine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBasketLine'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketLine'
+          description: ''
+    delete:
+      operationId: oscarapi_baskets_lines_destroy
+      description: |-
+        Only the field `quantity` can be changed in this view.
+        All other fields are readonly.
+      parameters:
+      - name: basket_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /oscarapi/baskets/{id}/:
+    get:
+      operationId: oscarapi_baskets_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+    put:
+      operationId: oscarapi_baskets_update
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Basket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Basket'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+    patch:
+      operationId: oscarapi_baskets_partial_update
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBasket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBasket'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+    delete:
+      operationId: oscarapi_baskets_destroy
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /oscarapi/baskets/{id}/lines/:
+    get:
+      operationId: oscarapi_baskets_lines_list
+      description: |-
+        Api for adding lines to a basket.
+
+        Permission will be checked,
+        Regular users may only access their own basket,
+        staff users may access any basket.
+
+        GET:
+        A list of basket lines.
+
+        POST(basket, line_reference, product, stockrecord,
+             quantity, price_currency, price_excl_tax, price_incl_tax):
+        Add a line to the basket, example::
+
+            {
+                "basket": "http://127.0.0.1:8000/oscarapi/baskets/100/",
+                "line_reference": "234_345",
+                "product": "http://127.0.0.1:8000/oscarapi/products/209/",
+                "stockrecord":
+                    "http://127.0.0.1:8000/ooscarapi/products/209/stockercords/1/",
+                "quantity": 3,
+                "price_currency": "EUR",
+                "price_excl_tax": "100.0",
+                "price_incl_tax": "121.0"
+            }
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BasketLine'
+          description: ''
+    post:
+      operationId: oscarapi_baskets_lines_create
+      description: |-
+        Api for adding lines to a basket.
+
+        Permission will be checked,
+        Regular users may only access their own basket,
+        staff users may access any basket.
+
+        GET:
+        A list of basket lines.
+
+        POST(basket, line_reference, product, stockrecord,
+             quantity, price_currency, price_excl_tax, price_incl_tax):
+        Add a line to the basket, example::
+
+            {
+                "basket": "http://127.0.0.1:8000/oscarapi/baskets/100/",
+                "line_reference": "234_345",
+                "product": "http://127.0.0.1:8000/oscarapi/products/209/",
+                "stockrecord":
+                    "http://127.0.0.1:8000/ooscarapi/products/209/stockercords/1/",
+                "quantity": 3,
+                "price_currency": "EUR",
+                "price_excl_tax": "100.0",
+                "price_incl_tax": "121.0"
+            }
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketLine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketLine'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketLine'
+          description: ''
+  /oscarapi/baskets/{id}/lines{format}:
+    get:
+      operationId: oscarapi_baskets_lines{format}_list
+      description: |-
+        Api for adding lines to a basket.
+
+        Permission will be checked,
+        Regular users may only access their own basket,
+        staff users may access any basket.
+
+        GET:
+        A list of basket lines.
+
+        POST(basket, line_reference, product, stockrecord,
+             quantity, price_currency, price_excl_tax, price_incl_tax):
+        Add a line to the basket, example::
+
+            {
+                "basket": "http://127.0.0.1:8000/oscarapi/baskets/100/",
+                "line_reference": "234_345",
+                "product": "http://127.0.0.1:8000/oscarapi/products/209/",
+                "stockrecord":
+                    "http://127.0.0.1:8000/ooscarapi/products/209/stockercords/1/",
+                "quantity": 3,
+                "price_currency": "EUR",
+                "price_excl_tax": "100.0",
+                "price_incl_tax": "121.0"
+            }
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BasketLine'
+          description: ''
+    post:
+      operationId: oscarapi_baskets_lines{format}_create
+      description: |-
+        Api for adding lines to a basket.
+
+        Permission will be checked,
+        Regular users may only access their own basket,
+        staff users may access any basket.
+
+        GET:
+        A list of basket lines.
+
+        POST(basket, line_reference, product, stockrecord,
+             quantity, price_currency, price_excl_tax, price_incl_tax):
+        Add a line to the basket, example::
+
+            {
+                "basket": "http://127.0.0.1:8000/oscarapi/baskets/100/",
+                "line_reference": "234_345",
+                "product": "http://127.0.0.1:8000/oscarapi/products/209/",
+                "stockrecord":
+                    "http://127.0.0.1:8000/ooscarapi/products/209/stockercords/1/",
+                "quantity": 3,
+                "price_currency": "EUR",
+                "price_excl_tax": "100.0",
+                "price_incl_tax": "121.0"
+            }
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BasketLine'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/BasketLine'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BasketLine'
+          description: ''
+  /oscarapi/baskets/{id}{format}:
+    get:
+      operationId: oscarapi_baskets_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+    put:
+      operationId: oscarapi_baskets_update
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Basket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Basket'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+    patch:
+      operationId: oscarapi_baskets_partial_update
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedBasket'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedBasket'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+    delete:
+      operationId: oscarapi_baskets_destroy
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Cart.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /oscarapi/baskets{format}:
+    get:
+      operationId: oscarapi_baskets{format}_list
+      description: Retrieve all baskets that belong to the current (authenticated)
+        user.
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Basket'
+          description: ''
+  /oscarapi/basket{format}:
+    get:
+      operationId: oscarapi_basket{format}_retrieve
+      description: |-
+        Api for retrieving a user's basket.
+
+        GET:
+        Retrieve your basket.
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Basket'
+          description: ''
+  /oscarapi/categories/:
+    get:
+      operationId: oscarapi_categories_list
+      description: ''
+      parameters:
+      - in: path
+        name: breadcrumbs
+        schema:
+          type: string
+        required: true
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+          description: ''
+  /oscarapi/categories/{breadcrumbs}/:
+    get:
+      operationId: oscarapi_categories_list
+      description: ''
+      parameters:
+      - in: path
+        name: breadcrumbs
+        schema:
+          type: string
+        required: true
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+          description: ''
+  /oscarapi/categories/{id}/:
+    get:
+      operationId: oscarapi_categories_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Category.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: ''
+  /oscarapi/categories/{id}{format}:
+    get:
+      operationId: oscarapi_categories_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Category.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Category'
+          description: ''
+  /oscarapi/categories{format}:
+    get:
+      operationId: oscarapi_categories{format}_list
+      description: ''
+      parameters:
+      - in: path
+        name: breadcrumbs
+        schema:
+          type: string
+        required: true
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Category'
+          description: ''
+  /oscarapi/checkout/:
+    post:
+      operationId: oscarapi_checkout_create
+      description: |-
+        Checkout and use a stripe account as payment.
+
+        POST(basket, shipping_address,
+             [total, shipping_method_code, shipping_charge, billing_address]):
+        {
+            "basket": "/api/baskets/1/",
+            "guest_email": "foo@example.com",
+            "total": "100.0",
+            "shipping_charge": {
+                "currency": "EUR",
+                "excl_tax": "10.0",
+                "tax": "0.6"
+            },
+            "shipping_method_code": "no-shipping-required",
+            "shipping_address": {
+                "country": "/api/countries/NL/",
+                "first_name": "Henk",
+                "last_name": "Van den Heuvel",
+                "line1": "Roemerlaan 44",
+                "line2": "",
+                "line3": "",
+                "line4": "Kroekingen",
+                "notes": "Niet STUK MAKEN OK!!!!",
+                "phone_number": "+31 26 370 4887",
+                "postcode": "7777KK",
+                "state": "Gerendrecht",
+                "title": "Mr"
+            },
+            "payment": {
+                "cash": {
+                    "amount": "100.00"
+                }
+            }
+        }
+
+        Returns the order object.
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Checkout'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Checkout'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Checkout'
+          description: ''
+  /oscarapi/checkout/payment-methods/:
+    get:
+      operationId: oscarapi_checkout_payment_methods_retrieve
+      description: ''
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /oscarapi/checkout/payment-states/:
+    get:
+      operationId: oscarapi_checkout_payment_states_retrieve
+      description: ''
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /oscarapi/checkout/payment-states/{id}/:
+    get:
+      operationId: oscarapi_checkout_payment_states_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /oscarapi/countries/:
+    get:
+      operationId: oscarapi_countries_list
+      description: ''
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+          description: ''
+  /oscarapi/countries/{iso_3166_1_a2}/:
+    get:
+      operationId: oscarapi_countries_retrieve
+      description: ''
+      parameters:
+      - name: iso_3166_1_a2
+        in: path
+        required: true
+        description: A unique value identifying this Country.
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Country'
+          description: ''
+  /oscarapi/countries{format}:
+    get:
+      operationId: oscarapi_countries{format}_list
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Country'
+          description: ''
+  /oscarapi/login/:
+    get:
+      operationId: oscarapi_login_retrieve
+      description: |-
+        Api for logging in users.
+
+        DELETE:
+        Log the user out by destroying the session.
+        Anonymous users will have their cart destroyed as well, because there is
+        no way to reach it anymore
+
+        POST(username, password):
+        1. The user will be authenticated. The next steps will only be
+           performed is login is successful. Logging in logged in users results in
+           405.
+        2. The anonymous cart will be merged with the private cart associated with
+           that authenticated user.
+        3. A new session will be started, this session identifies the authenticated
+           user for the duration of the session, without further need for
+           authentication.
+        4. The new, merged cart will be associated with this session.
+        5. The anonymous session will be terminated.
+        6. A response will be issued containing the new session id as a header
+           (only when the request contained the session header as well).
+
+        GET (enabled in DEBUG mode only):
+        Get the details of the logged in user.
+        If more details are needed, use the ``OSCARAPI_USER_FIELDS`` setting to change
+        the fields the ``UserSerializer`` will render.
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+    post:
+      operationId: oscarapi_login_create
+      description: |-
+        Api for logging in users.
+
+        DELETE:
+        Log the user out by destroying the session.
+        Anonymous users will have their cart destroyed as well, because there is
+        no way to reach it anymore
+
+        POST(username, password):
+        1. The user will be authenticated. The next steps will only be
+           performed is login is successful. Logging in logged in users results in
+           405.
+        2. The anonymous cart will be merged with the private cart associated with
+           that authenticated user.
+        3. A new session will be started, this session identifies the authenticated
+           user for the duration of the session, without further need for
+           authentication.
+        4. The new, merged cart will be associated with this session.
+        5. The anonymous session will be terminated.
+        6. A response will be issued containing the new session id as a header
+           (only when the request contained the session header as well).
+
+        GET (enabled in DEBUG mode only):
+        Get the details of the logged in user.
+        If more details are needed, use the ``OSCARAPI_USER_FIELDS`` setting to change
+        the fields the ``UserSerializer`` will render.
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+    delete:
+      operationId: oscarapi_login_destroy
+      description: |-
+        Destroy the session.
+
+        for anonymous users that means having their basket destroyed as well,
+        because there is no way to reach it otherwise.
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /oscarapi/login{format}:
+    get:
+      operationId: oscarapi_login{format}_retrieve
+      description: |-
+        Api for logging in users.
+
+        DELETE:
+        Log the user out by destroying the session.
+        Anonymous users will have their cart destroyed as well, because there is
+        no way to reach it anymore
+
+        POST(username, password):
+        1. The user will be authenticated. The next steps will only be
+           performed is login is successful. Logging in logged in users results in
+           405.
+        2. The anonymous cart will be merged with the private cart associated with
+           that authenticated user.
+        3. A new session will be started, this session identifies the authenticated
+           user for the duration of the session, without further need for
+           authentication.
+        4. The new, merged cart will be associated with this session.
+        5. The anonymous session will be terminated.
+        6. A response will be issued containing the new session id as a header
+           (only when the request contained the session header as well).
+
+        GET (enabled in DEBUG mode only):
+        Get the details of the logged in user.
+        If more details are needed, use the ``OSCARAPI_USER_FIELDS`` setting to change
+        the fields the ``UserSerializer`` will render.
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+    post:
+      operationId: oscarapi_login{format}_create
+      description: |-
+        Api for logging in users.
+
+        DELETE:
+        Log the user out by destroying the session.
+        Anonymous users will have their cart destroyed as well, because there is
+        no way to reach it anymore
+
+        POST(username, password):
+        1. The user will be authenticated. The next steps will only be
+           performed is login is successful. Logging in logged in users results in
+           405.
+        2. The anonymous cart will be merged with the private cart associated with
+           that authenticated user.
+        3. A new session will be started, this session identifies the authenticated
+           user for the duration of the session, without further need for
+           authentication.
+        4. The new, merged cart will be associated with this session.
+        5. The anonymous session will be terminated.
+        6. A response will be issued containing the new session id as a header
+           (only when the request contained the session header as well).
+
+        GET (enabled in DEBUG mode only):
+        Get the details of the logged in user.
+        If more details are needed, use the ``OSCARAPI_USER_FIELDS`` setting to change
+        the fields the ``UserSerializer`` will render.
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+    delete:
+      operationId: oscarapi_login{format}_destroy
+      description: |-
+        Destroy the session.
+
+        for anonymous users that means having their basket destroyed as well,
+        because there is no way to reach it otherwise.
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /oscarapi/options/:
+    get:
+      operationId: oscarapi_options_list
+      description: ''
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Option'
+          description: ''
+  /oscarapi/options/{id}/:
+    get:
+      operationId: oscarapi_options_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Option.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Option'
+          description: ''
+  /oscarapi/options/{id}{format}:
+    get:
+      operationId: oscarapi_options_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Option.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Option'
+          description: ''
+  /oscarapi/options{format}:
+    get:
+      operationId: oscarapi_options{format}_list
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Option'
+          description: ''
+  /oscarapi/orderlineattributes/{id}/:
+    get:
+      operationId: oscarapi_orderlineattributes_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Line Attribute.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderLineAttribute'
+          description: ''
+  /oscarapi/orderlineattributes/{id}{format}:
+    get:
+      operationId: oscarapi_orderlineattributes_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Line Attribute.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderLineAttribute'
+          description: ''
+  /oscarapi/orderlines/{id}/:
+    get:
+      operationId: oscarapi_orderlines_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Order Line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderLine'
+          description: ''
+  /oscarapi/orderlines/{id}{format}:
+    get:
+      operationId: oscarapi_orderlines_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Order Line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderLine'
+          description: ''
+  /oscarapi/orders/:
+    get:
+      operationId: oscarapi_orders_list
+      description: ''
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+          description: ''
+  /oscarapi/orders/{id}/:
+    get:
+      operationId: oscarapi_orders_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Order.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+  /oscarapi/orders/{id}/lines/:
+    get:
+      operationId: oscarapi_orders_lines_list
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Order Line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderLine'
+          description: ''
+  /oscarapi/orders/{id}/lines{format}:
+    get:
+      operationId: oscarapi_orders_lines{format}_list
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Order Line.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderLine'
+          description: ''
+  /oscarapi/orders/{id}{format}:
+    get:
+      operationId: oscarapi_orders_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Order.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+          description: ''
+  /oscarapi/orders{format}:
+    get:
+      operationId: oscarapi_orders{format}_list
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Order'
+          description: ''
+  /oscarapi/products/:
+    get:
+      operationId: oscarapi_products_list
+      description: ''
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductLink'
+          description: ''
+  /oscarapi/products/{id}/:
+    get:
+      operationId: oscarapi_products_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Product.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /oscarapi/products/{id}/availability/:
+    get:
+      operationId: oscarapi_products_availability_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Product.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Availability'
+          description: ''
+  /oscarapi/products/{id}/availability{format}:
+    get:
+      operationId: oscarapi_products_availability{format}_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Product.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Availability'
+          description: ''
+  /oscarapi/products/{id}/price/:
+    get:
+      operationId: oscarapi_products_price_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Product.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+          description: ''
+  /oscarapi/products/{id}/price{format}:
+    get:
+      operationId: oscarapi_products_price{format}_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Product.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Price'
+          description: ''
+  /oscarapi/products/{id}/stockrecords/:
+    get:
+      operationId: oscarapi_products_stockrecords_list
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this stock record.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductStockRecord'
+          description: ''
+  /oscarapi/products/{id}/stockrecords{format}:
+    get:
+      operationId: oscarapi_products_stockrecords{format}_list
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this stock record.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductStockRecord'
+          description: ''
+  /oscarapi/products/{id}{format}:
+    get:
+      operationId: oscarapi_products_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Product.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+  /oscarapi/products/{product_pk}/stockrecords/{id}/:
+    get:
+      operationId: oscarapi_products_stockrecords_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this stock record.
+        schema:
+          type: integer
+      - name: product_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductStockRecord'
+          description: ''
+  /oscarapi/products/{product_pk}/stockrecords/{id}{format}:
+    get:
+      operationId: oscarapi_products_stockrecords_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this stock record.
+        schema:
+          type: integer
+      - name: product_pk
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductStockRecord'
+          description: ''
+  /oscarapi/products{format}:
+    get:
+      operationId: oscarapi_products{format}_list
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductLink'
+          description: ''
+  /oscarapi/ranges/:
+    get:
+      operationId: oscarapi_ranges_list
+      description: ''
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Range'
+          description: ''
+  /oscarapi/ranges/{id}/:
+    get:
+      operationId: oscarapi_ranges_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Range.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Range'
+          description: ''
+  /oscarapi/ranges/{id}{format}:
+    get:
+      operationId: oscarapi_ranges_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this Range.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Range'
+          description: ''
+  /oscarapi/ranges{format}:
+    get:
+      operationId: oscarapi_ranges{format}_list
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Range'
+          description: ''
+  /oscarapi/useraddresses/:
+    get:
+      operationId: oscarapi_useraddresses_list
+      description: ''
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserAddress'
+          description: ''
+    post:
+      operationId: oscarapi_useraddresses_create
+      description: ''
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAddress'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserAddress'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAddress'
+          description: ''
+  /oscarapi/useraddresses/{id}/:
+    get:
+      operationId: oscarapi_useraddresses_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this User address.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAddress'
+          description: ''
+    put:
+      operationId: oscarapi_useraddresses_update
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this User address.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAddress'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserAddress'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAddress'
+          description: ''
+    patch:
+      operationId: oscarapi_useraddresses_partial_update
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this User address.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserAddress'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserAddress'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAddress'
+          description: ''
+    delete:
+      operationId: oscarapi_useraddresses_destroy
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this User address.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /oscarapi/useraddresses/{id}{format}:
+    get:
+      operationId: oscarapi_useraddresses_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this User address.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAddress'
+          description: ''
+    put:
+      operationId: oscarapi_useraddresses_update
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this User address.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAddress'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserAddress'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAddress'
+          description: ''
+    patch:
+      operationId: oscarapi_useraddresses_partial_update
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this User address.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUserAddress'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUserAddress'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAddress'
+          description: ''
+    delete:
+      operationId: oscarapi_useraddresses_destroy
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this User address.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /oscarapi/useraddresses{format}:
+    get:
+      operationId: oscarapi_useraddresses{format}_list
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/UserAddress'
+          description: ''
+    post:
+      operationId: oscarapi_useraddresses{format}_create
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserAddress'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/UserAddress'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UserAddress'
+          description: ''
+  /oscarapi/users/{id}/:
+    get:
+      operationId: oscarapi_users_retrieve
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: oscarapi_users_update
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: oscarapi_users_partial_update
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: oscarapi_users_destroy
+      description: ''
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /oscarapi/users/{id}{format}:
+    get:
+      operationId: oscarapi_users_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: oscarapi_users_update
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: oscarapi_users_partial_update
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: oscarapi_users_destroy
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      - name: id
+        in: path
+        required: true
+        description: A unique integer value identifying this user.
+        schema:
+          type: integer
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '204':
+          description: No response body
+  /oscarapi/{format}:
+    get:
+      operationId: oscarapi_retrieve
+      description: ''
+      parameters:
+      - name: format
+        in: path
+        required: false
+        description: ''
+        schema:
+          type: string
+      tags:
+      - oscarapi
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+          description: ''
+  /rest-auth/login/:
+    post:
+      operationId: rest_auth_login_create
+      description: |-
+        Check the credentials and return the REST Token
+        if the credentials are valid and authenticated.
+        Calls Django Auth login method to register User ID
+        in Django session framework
+
+        Accept the following POST parameters: username, password
+        Return the REST Framework Token Object's key.
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+  /rest-auth/logout/:
+    get:
+      operationId: rest_auth_logout_retrieve
+      description: |-
+        Calls Django logout method and delete the Token object
+        assigned to the current User object.
+
+        Accepts/Returns nothing.
+      tags:
+      - rest-auth
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+    post:
+      operationId: rest_auth_logout_create
+      description: |-
+        Calls Django logout method and delete the Token object
+        assigned to the current User object.
+
+        Accepts/Returns nothing.
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              description: Unspecified request body
+              additionalProperties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              description: Unspecified request body
+              additionalProperties: {}
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: {}
+                description: Unspecified response body
+          description: ''
+  /rest-auth/password/change/:
+    post:
+      operationId: rest_auth_password_change_create
+      description: |-
+        Calls Django Auth SetPasswordForm save method.
+
+        Accepts the following POST parameters: new_password1, new_password2
+        Returns the success/fail message.
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordChange'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordChange'
+          description: ''
+  /rest-auth/password/reset/:
+    post:
+      operationId: rest_auth_password_reset_create
+      description: |-
+        Calls Django Auth PasswordResetForm save method.
+
+        Accepts the following POST parameters: email
+        Returns the success/fail message.
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordReset'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordReset'
+          description: ''
+  /rest-auth/password/reset/confirm/:
+    post:
+      operationId: rest_auth_password_reset_confirm_create
+      description: |-
+        Password reset e-mail link is confirmed, therefore
+        this resets the user's password.
+
+        Accepts the following POST parameters: token, uid,
+            new_password1, new_password2
+        Returns the success/fail message.
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PasswordResetConfirm'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PasswordResetConfirm'
+          description: ''
+  /rest-auth/refresh-token/:
+    post:
+      operationId: rest_auth_refresh_token_create
+      description: |-
+        API View that returns a refreshed token (with new expiration) based on
+        existing token
+
+        If 'orig_iat' field (original issued-at-time) is found it will first check
+        if it's within expiration window, then copy it to the new token.
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RefreshAuthToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/RefreshAuthToken'
+        required: true
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RefreshAuthToken'
+          description: ''
+  /rest-auth/registration/:
+    post:
+      operationId: rest_auth_registration_create
+      description: ''
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Signup'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Signup'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SignupResponse'
+          description: ''
+  /rest-auth/registration/account-confirm-email/{key}/:
+    post:
+      operationId: rest_auth_registration_account_confirm_email_create
+      description: ''
+      parameters:
+      - name: key
+        in: path
+        required: true
+        description: ''
+        schema:
+          type: string
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyEmail'
+          description: ''
+  /rest-auth/registration/verify-email/:
+    post:
+      operationId: rest_auth_registration_verify_email_create
+      description: ''
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/VerifyEmail'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VerifyEmail'
+          description: ''
+  /rest-auth/user/:
+    get:
+      operationId: rest_auth_user_retrieve
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - rest-auth
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: rest_auth_user_update
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    patch:
+      operationId: rest_auth_user_partial_update
+      description: |-
+        Reads and updates UserModel fields
+        Accepts GET, PUT, PATCH methods.
+
+        Default accepted fields: username, first_name, last_name
+        Default display fields: pk, username, email, first_name, last_name
+        Read-only fields: pk, email
+
+        Returns UserModel fields.
+      tags:
+      - rest-auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/PatchedUser'
+      security:
+      - jwtAuth: []
+      - basicAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+components:
+  schemas:
+    AddProduct:
+      type: object
+      description: Serializes and validates an add to basket request.
+      properties:
+        quantity:
+          type: integer
+        url:
+          type: string
+          format: uri
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/OptionValue'
+      required:
+      - quantity
+      - url
+    Attribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        datatype:
+          $ref: '#/components/schemas/DatatypeEnum'
+        required:
+          type: boolean
+        displayOrder:
+          type: integer
+        name:
+          type: string
+          description: User-friendly attribute name
+          maxLength: 100
+        slug:
+          type: string
+          description: Short unique attribute label
+          maxLength: 50
+          pattern: ^[-a-zA-Z0-9_]+$
+        description:
+          type: [string, 'null']
+          description: Short description
+          maxLength: 256
+        enumGroup:
+          $ref: '#/components/schemas/EnumGroup'
+      required:
+      - datatype
+      - enumGroup
+      - id
+      - name
+      - slug
+    Availability:
+      type: object
+      properties:
+        isAvailableToBuy:
+          type: boolean
+        numAvailable:
+          type: integer
+        message:
+          type: string
+      required:
+      - isAvailableToBuy
+      - message
+    Basket:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        owner:
+          type: [string, 'null']
+          format: uri
+        status:
+          enum:
+          - Open
+          - Merged
+          - Saved
+          - Frozen
+          - Submitted
+          type: string
+        lines:
+          type: string
+          format: uri
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        totalExclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        totalExclTaxExclDiscounts:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        totalInclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        totalInclTaxExclDiscounts:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        totalTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        currency:
+          type: string
+        voucherDiscounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherDiscount'
+        offerDiscounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/OfferDiscount'
+        isTaxKnown:
+          type: boolean
+          readOnly: true
+      required:
+      - id
+      - isTaxKnown
+      - lines
+      - url
+    BasketLine:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        product:
+          type: string
+          format: uri
+        quantity:
+          type: integer
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineAttribute'
+          readOnly: true
+        priceCurrency:
+          type: string
+          maxLength: 12
+        priceExclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+          readOnly: true
+        priceInclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+          readOnly: true
+        priceInclTaxExclDiscounts:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+          readOnly: true
+        priceExclTaxExclDiscounts:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+          readOnly: true
+        isTaxKnown:
+          type: boolean
+          readOnly: true
+        warning:
+          type: string
+          readOnly: true
+        basket:
+          type: string
+          format: uri
+        stockrecord:
+          type: string
+          format: uri
+        dateCreated:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - attributes
+      - basket
+      - dateCreated
+      - isTaxKnown
+      - priceExclTax
+      - priceExclTaxExclDiscounts
+      - priceInclTax
+      - priceInclTaxExclDiscounts
+      - product
+      - stockrecord
+      - url
+      - warning
+    BillingAddress:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        title:
+          $ref: '#/components/schemas/TitleEnum'
+        firstName:
+          type: string
+          maxLength: 255
+        lastName:
+          type: string
+          maxLength: 255
+        line1:
+          type: string
+          maxLength: 255
+        line2:
+          type: string
+          maxLength: 255
+        line3:
+          type: string
+          maxLength: 255
+        line4:
+          type: string
+          maxLength: 255
+        state:
+          type: string
+          maxLength: 255
+        postcode:
+          type: string
+          maxLength: 64
+        searchText:
+          type: string
+          readOnly: true
+        country:
+          type: string
+          format: uri
+      required:
+      - country
+      - line1
+      - searchText
+      - url
+    Category:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        breadcrumbs:
+          type: string
+          readOnly: true
+        children:
+          type: string
+          format: uri
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        image:
+          type: [string, 'null']
+          format: uri
+        slug:
+          type: string
+          maxLength: 255
+          pattern: ^[-a-zA-Z0-9_]+$
+      required:
+      - breadcrumbs
+      - children
+      - name
+      - slug
+      - url
+    Checkout:
+      type: object
+      properties:
+        basket:
+          type: string
+          format: uri
+        guestEmail:
+          type: string
+          format: email
+        total:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        shippingMethodCode:
+          type: string
+          maxLength: 128
+        shippingCharge:
+          allOf:
+          - $ref: '#/components/schemas/Price'
+        shippingAddress:
+          allOf:
+          - $ref: '#/components/schemas/ShippingAddress'
+        billingAddress:
+          allOf:
+          - $ref: '#/components/schemas/BillingAddress'
+        user:
+          type: string
+          format: uri
+        payment:
+          $ref: '#/components/schemas/StripeCheckoutPaymentMethods'
+      required:
+      - basket
+      - payment
+    ChildProductserializer:
+      type: object
+      description: Serializer for child products
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        upc:
+          type: [string, 'null']
+          description: Universal Product Code (UPC) is an identifier for a product
+            which is not specific to a particular  supplier. Eg an ISBN for a book.
+          maxLength: 64
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        structure:
+          $ref: '#/components/schemas/StructureEnum'
+        dateCreated:
+          type: string
+          format: date-time
+          readOnly: true
+        dateUpdated:
+          type: string
+          format: date-time
+          readOnly: true
+        recommendedProducts:
+          type: array
+          items:
+            type: string
+            format: uri
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttributeValue'
+        categories:
+          type: array
+          items:
+            type: string
+        productClass:
+          type: [string, 'null']
+        price:
+          type: string
+          format: uri
+          readOnly: true
+        availability:
+          type: string
+          format: uri
+          readOnly: true
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
+      required:
+      - availability
+      - dateCreated
+      - dateUpdated
+      - id
+      - price
+      - productClass
+      - url
+    ClosingRules:
+      type: object
+      properties:
+        start:
+          type: string
+          format: date-time
+        end:
+          type: string
+          format: date-time
+        reason:
+          type: [string, 'null']
+      required:
+      - end
+      - start
+    CollectionMethodEnum:
+      enum:
+      - charge_automatically
+      - send_invoice
+      type: string
+    Country:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        iso31661A3:
+          type: string
+          maxLength: 3
+        iso31661Numeric:
+          type: string
+          maxLength: 3
+        printableName:
+          type: string
+          maxLength: 128
+        name:
+          type: string
+          maxLength: 128
+        displayOrder:
+          type: integer
+          description: Higher the number, higher the country in the list.
+        isShippingCountry:
+          type: boolean
+      required:
+      - name
+      - printableName
+      - url
+    DatatypeEnum:
+      enum:
+      - text
+      - date
+      - float
+      - int
+      - bool
+      - object
+      - enum
+      type: string
+    EntityAttributeValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        value:
+          type: string
+          readOnly: true
+        attribute:
+          $ref: '#/components/schemas/Attribute'
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        entityCtId:
+          type: integer
+          readOnly: true
+        entityId:
+          type: integer
+        contentTypeName:
+          type: string
+          readOnly: true
+      required:
+      - attribute
+      - contentTypeName
+      - entityCtId
+      - entityId
+      - id
+      - modified
+      - value
+    EnumGroup:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        values:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnumValue'
+          readOnly: true
+        name:
+          type: string
+          maxLength: 100
+      required:
+      - id
+      - name
+      - values
+    EnumValue:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        value:
+          type: string
+          maxLength: 50
+      required:
+      - id
+      - value
+    InlineBillingAddress:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        country:
+          type: string
+          format: uri
+        title:
+          $ref: '#/components/schemas/TitleEnum'
+        firstName:
+          type: string
+          maxLength: 255
+        lastName:
+          type: string
+          maxLength: 255
+        line1:
+          type: string
+          maxLength: 255
+        line2:
+          type: string
+          maxLength: 255
+        line3:
+          type: string
+          maxLength: 255
+        line4:
+          type: string
+          maxLength: 255
+        state:
+          type: string
+          maxLength: 255
+        postcode:
+          type: string
+          maxLength: 64
+        searchText:
+          type: string
+          readOnly: true
+      required:
+      - country
+      - id
+      - line1
+      - searchText
+    InlineShippingAddress:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        country:
+          type: string
+          format: uri
+        title:
+          $ref: '#/components/schemas/TitleEnum'
+        firstName:
+          type: string
+          maxLength: 255
+        lastName:
+          type: string
+          maxLength: 255
+        line1:
+          type: string
+          maxLength: 255
+        line2:
+          type: string
+          maxLength: 255
+        line3:
+          type: string
+          maxLength: 255
+        line4:
+          type: string
+          maxLength: 255
+        state:
+          type: string
+          maxLength: 255
+        postcode:
+          type: string
+          maxLength: 64
+        searchText:
+          type: string
+          readOnly: true
+        phoneNumber:
+          type: string
+          description: In case we need to call you about your order
+          maxLength: 128
+        notes:
+          type: string
+          description: Tell us anything we should know when delivering your order.
+      required:
+      - country
+      - id
+      - line1
+      - searchText
+    InlineStripePaymentMethod:
+      type: object
+      properties:
+        enabled:
+          type: boolean
+          default: false
+        payBalance:
+          type: boolean
+          default: true
+        amount:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        reference:
+          type: string
+          default: ''
+          maxLength: 128
+        stripePaymentMethodId:
+          type: string
+        stripeConnectedAccountId:
+          type: string
+        stripePaymentIntentId:
+          type: string
+      required:
+      - stripeConnectedAccountId
+      - stripePaymentMethodId
+    LineAttribute:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        line:
+          type: string
+          format: uri
+          readOnly: true
+        value:
+          type: string
+          maxLength: 255
+        option:
+          type: string
+          format: uri
+      required:
+      - line
+      - option
+      - url
+      - value
+    Login:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+          maxLength: 100
+      required:
+      - password
+      - username
+    OfferDiscount:
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        amount:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+      required:
+      - amount
+      - description
+      - name
+    OpeningHours:
+      type: object
+      properties:
+        weekday:
+          $ref: '#/components/schemas/WeekdayEnum'
+        fromHour:
+          type: string
+          format: time
+        toHour:
+          type: string
+          format: time
+      required:
+      - fromHour
+      - toHour
+      - weekday
+    Option:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        code:
+          type: string
+          pattern: ^[-a-zA-Z0-9_]+$
+        name:
+          type: string
+          maxLength: 128
+        type:
+          $ref: '#/components/schemas/TypeEnum'
+      required:
+      - code
+      - name
+      - url
+    OptionValue:
+      type: object
+      properties:
+        option:
+          type: string
+          format: uri
+        value:
+          type: string
+      required:
+      - option
+      - value
+    Order:
+      type: object
+      properties:
+        number:
+          type: string
+          maxLength: 128
+        basket:
+          type: [string, 'null']
+          format: uri
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        lines:
+          type: string
+          format: uri
+          readOnly: true
+        owner:
+          type: string
+          format: uri
+          readOnly: true
+        billingAddress:
+          $ref: '#/components/schemas/InlineBillingAddress'
+        currency:
+          type: string
+          maxLength: 12
+        totalInclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        totalExclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        shippingInclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        shippingExclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        shippingAddress:
+          $ref: '#/components/schemas/InlineShippingAddress'
+        shippingMethod:
+          type: string
+          maxLength: 128
+        shippingCode:
+          type: string
+          maxLength: 128
+        status:
+          type: string
+          maxLength: 100
+        guestEmail:
+          type: string
+          format: email
+          maxLength: 254
+        datePlaced:
+          type: string
+          format: date-time
+        paymentUrl:
+          type: string
+          format: uri
+          readOnly: true
+        offerDiscounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderOfferDiscount'
+          readOnly: true
+        voucherDiscounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderVoucherOffer'
+          readOnly: true
+      required:
+      - datePlaced
+      - lines
+      - number
+      - offerDiscounts
+      - owner
+      - paymentUrl
+      - totalExclTax
+      - totalInclTax
+      - url
+      - voucherDiscounts
+    OrderLine:
+      type: object
+      description: This serializer renames some fields so they match up with the basket
+      properties:
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderLineAttribute'
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        product:
+          type: [string, 'null']
+          format: uri
+        stockrecord:
+          type: string
+          format: uri
+        quantity:
+          type: integer
+        priceCurrency:
+          type: string
+          maxLength: 12
+        priceExclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        priceInclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        priceInclTaxExclDiscounts:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        priceExclTaxExclDiscounts:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        order:
+          type: string
+          format: uri
+      required:
+      - order
+      - priceCurrency
+      - priceExclTax
+      - priceExclTaxExclDiscounts
+      - priceInclTax
+      - priceInclTaxExclDiscounts
+      - stockrecord
+      - url
+    OrderLineAttribute:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        type:
+          type: string
+          maxLength: 128
+        value:
+          type: string
+          maxLength: 255
+        line:
+          type: string
+          format: uri
+        option:
+          type: [string, 'null']
+          format: uri
+      required:
+      - line
+      - type
+      - url
+      - value
+    OrderOfferDiscount:
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        amount:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+      required:
+      - amount
+      - description
+      - name
+    OrderVoucherOffer:
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        amount:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        voucher:
+          $ref: '#/components/schemas/Voucher'
+      required:
+      - amount
+      - description
+      - name
+    PartnerAddress:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          $ref: '#/components/schemas/TitleEnum'
+        firstName:
+          type: string
+          maxLength: 255
+        lastName:
+          type: string
+          maxLength: 255
+        line1:
+          type: string
+          maxLength: 255
+        line2:
+          type: string
+          maxLength: 255
+        line3:
+          type: string
+          maxLength: 255
+        line4:
+          type: string
+          maxLength: 255
+        state:
+          type: string
+          maxLength: 255
+        postcode:
+          type: string
+          maxLength: 64
+        searchText:
+          type: string
+          readOnly: true
+        country:
+          type: string
+      required:
+      - country
+      - id
+      - line1
+      - searchText
+    PasswordChange:
+      type: object
+      properties:
+        newPassword1:
+          type: string
+          maxLength: 128
+        newPassword2:
+          type: string
+          maxLength: 128
+      required:
+      - newPassword1
+      - newPassword2
+    PasswordReset:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+      required:
+      - email
+    PasswordResetConfirm:
+      type: object
+      description: Serializer for requesting a password reset e-mail.
+      properties:
+        newPassword1:
+          type: string
+          maxLength: 128
+        newPassword2:
+          type: string
+          maxLength: 128
+        uid:
+          type: string
+        token:
+          type: string
+      required:
+      - newPassword1
+      - newPassword2
+      - token
+      - uid
+    PatchedBasket:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        owner:
+          type: [string, 'null']
+          format: uri
+        status:
+          enum:
+          - Open
+          - Merged
+          - Saved
+          - Frozen
+          - Submitted
+          type: string
+        lines:
+          type: string
+          format: uri
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        totalExclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        totalExclTaxExclDiscounts:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        totalInclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        totalInclTaxExclDiscounts:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        totalTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        currency:
+          type: string
+        voucherDiscounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PatchedVoucherDiscount'
+        offerDiscounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PatchedOfferDiscount'
+        isTaxKnown:
+          type: boolean
+          readOnly: true
+    PatchedBasketLine:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        product:
+          type: string
+          format: uri
+        quantity:
+          type: integer
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/LineAttribute'
+          readOnly: true
+        priceCurrency:
+          type: string
+          maxLength: 12
+        priceExclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+          readOnly: true
+        priceInclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+          readOnly: true
+        priceInclTaxExclDiscounts:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+          readOnly: true
+        priceExclTaxExclDiscounts:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+          readOnly: true
+        isTaxKnown:
+          type: boolean
+          readOnly: true
+        warning:
+          type: string
+          readOnly: true
+        basket:
+          type: string
+          format: uri
+        stockrecord:
+          type: string
+          format: uri
+        dateCreated:
+          type: string
+          format: date-time
+          readOnly: true
+    PatchedLineAttribute:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        line:
+          type: string
+          format: uri
+          readOnly: true
+        value:
+          type: string
+          maxLength: 255
+        option:
+          type: string
+          format: uri
+    PatchedOfferDiscount:
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        amount:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+    PatchedUser:
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: integer
+          readOnly: true
+        dateJoined:
+          type: string
+          format: date-time
+    PatchedUserAddress:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          $ref: '#/components/schemas/TitleEnum'
+        firstName:
+          type: string
+          maxLength: 255
+        lastName:
+          type: string
+          maxLength: 255
+        line1:
+          type: string
+          maxLength: 255
+        line2:
+          type: string
+          maxLength: 255
+        line3:
+          type: string
+          maxLength: 255
+        line4:
+          type: string
+          maxLength: 255
+        state:
+          type: string
+          maxLength: 255
+        postcode:
+          type: string
+          maxLength: 64
+        searchText:
+          type: string
+          readOnly: true
+        phoneNumber:
+          type: string
+          description: In case we need to call you about your order
+          maxLength: 128
+        notes:
+          type: string
+          description: Tell us anything we should know when delivering your order.
+        isDefaultForShipping:
+          type: boolean
+        isDefaultForBilling:
+          type: boolean
+        country:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: uri
+          readOnly: true
+    PatchedVoucher:
+      type: object
+      properties:
+        name:
+          type: string
+          description: This will be shown in the checkout and basket once the coupon
+            is entered
+          maxLength: 128
+        code:
+          type: string
+          description: Case insensitive / No spaces allowed
+          maxLength: 128
+        startDatetime:
+          type: string
+          format: date-time
+        endDatetime:
+          type: string
+          format: date-time
+    PatchedVoucherDiscount:
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        amount:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        voucher:
+          $ref: '#/components/schemas/PatchedVoucher'
+    Price:
+      type: object
+      properties:
+        currency:
+          type: string
+          default: EUR
+          maxLength: 12
+        exclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        inclTax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        tax:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+      required:
+      - exclTax
+    Product:
+      type: object
+      description: Serializer for public api with strategy fields added for price
+        and availability
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        upc:
+          type: [string, 'null']
+          description: Universal Product Code (UPC) is an identifier for a product
+            which is not specific to a particular  supplier. Eg an ISBN for a book.
+          maxLength: 64
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+        structure:
+          $ref: '#/components/schemas/StructureEnum'
+        dateCreated:
+          type: string
+          format: date-time
+          readOnly: true
+        dateUpdated:
+          type: string
+          format: date-time
+          readOnly: true
+        recommendedProducts:
+          type: array
+          items:
+            type: string
+            format: uri
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductAttributeValue'
+        categories:
+          type: array
+          items:
+            type: string
+        productClass:
+          type: [string, 'null']
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductImage'
+        price:
+          type: string
+          format: uri
+          readOnly: true
+        availability:
+          type: string
+          format: uri
+          readOnly: true
+        stockrecords:
+          type: string
+          format: uri
+          readOnly: true
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Option'
+        children:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChildProductserializer'
+      required:
+      - availability
+      - dateCreated
+      - dateUpdated
+      - id
+      - price
+      - productClass
+      - stockrecords
+      - url
+    ProductAttributeValue:
+      type: object
+      properties:
+        name:
+          type: string
+          readOnly: true
+        value:
+          oneOf:
+          - type: string
+        code:
+          type: string
+          readOnly: true
+        product:
+          type: integer
+          writeOnly: true
+      required:
+      - code
+      - name
+      - value
+    ProductImage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        product:
+          type: integer
+          writeOnly: true
+        original:
+          type: string
+          format: uri
+        caption:
+          type: string
+          maxLength: 200
+        displayOrder:
+          type: integer
+          description: An image with a display order of zero will be the primary image
+            for a product
+        dateCreated:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - dateCreated
+      - id
+      - original
+    ProductLink:
+      type: object
+      description: |-
+        Summary serializer for list view, listing all products.
+
+        This serializer can be easily made to show any field on ``ProductSerializer``,
+        just add fields to the ``OSCARAPI_PRODUCT_FIELDS`` setting.
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        id:
+          type: integer
+          readOnly: true
+        upc:
+          type: [string, 'null']
+          description: Universal Product Code (UPC) is an identifier for a product
+            which is not specific to a particular  supplier. Eg an ISBN for a book.
+          maxLength: 64
+        title:
+          type: string
+          maxLength: 255
+      required:
+      - id
+      - url
+    ProductStockRecord:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        order:
+          type: integer
+          readOnly: true
+        created:
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          type: [string, 'null']
+          format: date-time
+        partnerSku:
+          type: string
+          maxLength: 128
+        priceCurrency:
+          type: string
+          maxLength: 12
+        priceExclTax:
+          type: [string, 'null']
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        priceRetail:
+          type: [string, 'null']
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        costPrice:
+          type: [string, 'null']
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        numInStock:
+          type: [integer, 'null']
+        numAllocated:
+          type: [integer, 'null']
+        lowStockThreshold:
+          type: [integer, 'null']
+        dateCreated:
+          type: string
+          format: date-time
+          readOnly: true
+        dateUpdated:
+          type: string
+          format: date-time
+          readOnly: true
+        product:
+          type: integer
+        partner:
+          type: integer
+      required:
+      - created
+      - dateCreated
+      - dateUpdated
+      - id
+      - order
+      - partner
+      - partnerSku
+      - product
+      - url
+    Range:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        name:
+          type: string
+          maxLength: 128
+        slug:
+          type: string
+          readOnly: true
+          pattern: ^[-a-zA-Z0-9_]+$
+        description:
+          type: string
+        isPublic:
+          type: boolean
+          description: Public ranges have a customer-facing page
+        includesAllProducts:
+          type: boolean
+        proxyClass:
+          type: [string, 'null']
+          maxLength: 255
+        dateCreated:
+          type: string
+          format: date-time
+          readOnly: true
+        includedProducts:
+          type: array
+          items:
+            type: string
+            format: uri
+          readOnly: true
+        excludedProducts:
+          type: array
+          items:
+            type: string
+            format: uri
+        classes:
+          type: array
+          items:
+            type: string
+            format: uri
+        includedCategories:
+          type: array
+          items:
+            type: string
+            format: uri
+      required:
+      - dateCreated
+      - includedProducts
+      - name
+      - slug
+      - url
+    RefreshAuthToken:
+      type: object
+      description: Serializer used for refreshing JWTs.
+      properties:
+        token:
+          type: string
+      required:
+      - token
+    ShippingAddress:
+      type: object
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        title:
+          $ref: '#/components/schemas/TitleEnum'
+        firstName:
+          type: string
+          maxLength: 255
+        lastName:
+          type: string
+          maxLength: 255
+        line1:
+          type: string
+          maxLength: 255
+        line2:
+          type: string
+          maxLength: 255
+        line3:
+          type: string
+          maxLength: 255
+        line4:
+          type: string
+          maxLength: 255
+        state:
+          type: string
+          maxLength: 255
+        postcode:
+          type: string
+          maxLength: 64
+        searchText:
+          type: string
+          readOnly: true
+        phoneNumber:
+          type: string
+          description: In case we need to call you about your order
+          maxLength: 128
+        notes:
+          type: string
+          description: Tell us anything we should know when delivering your order.
+        country:
+          type: string
+          format: uri
+      required:
+      - country
+      - line1
+      - searchText
+      - url
+    Signup:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          writeOnly: true
+          maxLength: 100
+        firstName:
+          type: [string, 'null']
+        lastName:
+          type: [string, 'null']
+      required:
+      - email
+      - password
+    SignupResponse:
+      type: object
+      properties:
+        detail:
+          type: string
+          readOnly: true
+      required:
+      - detail
+    StripeCheckoutPaymentMethods:
+      type: object
+      properties:
+        stripe:
+          $ref: '#/components/schemas/InlineStripePaymentMethod'
+      required:
+      - stripe
+    StructureEnum:
+      enum:
+      - standalone
+      - parent
+      - child
+      type: string
+    TitleEnum:
+      enum:
+      - Mr
+      - Miss
+      - Mrs
+      - Ms
+      - Dr
+      type: string
+    TypeEnum:
+      enum:
+      - Required
+      - Optional
+      type: string
+    User:
+      type: object
+      properties:
+        email:
+          type: string
+        id:
+          type: integer
+          readOnly: true
+        dateJoined:
+          type: string
+          format: date-time
+      required:
+      - email
+      - id
+    UserAddress:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          $ref: '#/components/schemas/TitleEnum'
+        firstName:
+          type: string
+          maxLength: 255
+        lastName:
+          type: string
+          maxLength: 255
+        line1:
+          type: string
+          maxLength: 255
+        line2:
+          type: string
+          maxLength: 255
+        line3:
+          type: string
+          maxLength: 255
+        line4:
+          type: string
+          maxLength: 255
+        state:
+          type: string
+          maxLength: 255
+        postcode:
+          type: string
+          maxLength: 64
+        searchText:
+          type: string
+          readOnly: true
+        phoneNumber:
+          type: string
+          description: In case we need to call you about your order
+          maxLength: 128
+        notes:
+          type: string
+          description: Tell us anything we should know when delivering your order.
+        isDefaultForShipping:
+          type: boolean
+        isDefaultForBilling:
+          type: boolean
+        country:
+          type: string
+          format: uri
+        url:
+          type: string
+          format: uri
+          readOnly: true
+      required:
+      - country
+      - id
+      - line1
+      - searchText
+      - url
+    VerifyEmail:
+      type: object
+      properties:
+        key:
+          type: string
+      required:
+      - key
+    Voucher:
+      type: object
+      properties:
+        name:
+          type: string
+          description: This will be shown in the checkout and basket once the coupon
+            is entered
+          maxLength: 128
+        code:
+          type: string
+          description: Case insensitive / No spaces allowed
+          maxLength: 128
+        startDatetime:
+          type: string
+          format: date-time
+        endDatetime:
+          type: string
+          format: date-time
+      required:
+      - code
+      - endDatetime
+      - name
+      - startDatetime
+    VoucherDiscount:
+      type: object
+      properties:
+        description:
+          type: string
+        name:
+          type: string
+        amount:
+          type: string
+          format: decimal
+          multipleOf: 0.01
+          maximum: 10000000000
+          minimum: -10000000000
+        voucher:
+          $ref: '#/components/schemas/Voucher'
+      required:
+      - amount
+      - description
+      - name
+    WeekdayEnum:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      type: integer
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    broken-social-oauth2:
+      type: oauth2
+      flows: {}
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    oauth2:
+      type: oauth2
+      flows: {}
+tags:
+- name: oscarapi
+  description: oscarapi
+- name: auth
+  description: auth
+- name: rest-auth
+  description: rest-auth
+"$schema": "http://json-schema.org/draft-04/schema#"

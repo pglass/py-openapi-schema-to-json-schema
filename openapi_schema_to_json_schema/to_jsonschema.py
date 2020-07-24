@@ -7,7 +7,7 @@ class InvalidTypeError(ValueError):
         super(InvalidTypeError, self).__init__(msg)
 
 
-def convert(schema, options=None):
+def _prepare(schema, options=None):
     notSupported = [
         'nullable', 'discriminator', 'readOnly',
         'writeOnly', 'xml', 'externalDocs',
@@ -43,10 +43,51 @@ def convert(schema, options=None):
     if options['cloneSchema']:
         schema = json.loads(json.dumps(schema))
 
+    return schema, options
+
+
+def convert(schema, options=None):
+    schema, options = _prepare(schema, options)
+
     schema = convertSchema(schema, options)
     schema['$schema'] = 'http://json-schema.org/draft-04/schema#'
 
     return schema
+
+
+def _recurse(tree, options):
+    for key, subtree in list(tree.items()):
+        if isinstance(subtree, dict):
+            if key == 'schema':
+                tree[key] = convertSchema(subtree, options)
+            else:
+                tree[key] = _recurse(subtree, options)
+        elif isinstance(subtree, list):
+            tree[key] = [
+                _recurse(item, options) if isinstance(item, dict) else item
+                for item in subtree
+            ]
+
+    return tree
+
+
+def convertDoc(doc, options):
+    doc, options = _prepare(doc, options)
+
+    components_schemas = doc.get('components', {}).get('schemas')
+    if components_schemas:
+        for name, struct in list(components_schemas.items()):
+            components_schemas[name] = convertSchema(struct, options)
+
+    paths = doc.get('paths')
+
+    if paths:
+        doc['paths'] = dict((path, _recurse(tree, options))
+                            for path, tree in paths.items())
+
+    doc['$schema'] = 'http://json-schema.org/draft-04/schema#'
+
+    return doc
 
 
 def convertSchema(schema, options):
