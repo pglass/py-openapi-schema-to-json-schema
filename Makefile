@@ -6,16 +6,21 @@ BUMPTYPE=patch
 
 $(VENV):
 	virtualenv $(VENV)
-	$(VENV_ACTIVATE); pip install tox bumpversion twine
+	$(VENV_ACTIVATE); pip install tox bumpversion twine 'readme_renderer[md]'
 
 test: $(VENV)
 	$(VENV_ACTIVATE); tox
 
 dist: clean-dist
-	python setup.py sdist
+	$(VENV_ACTIVATE); python setup.py sdist bdist_wheel
 	ls -ls dist
+	tar tzf dist/*.tar.gz
+	$(VENV_ACTIVATE); twine check dist/*
 
-release: test dist
+test-release: clean test dist
+	$(VENV_ACTIVATE); twine upload --repository-url https://test.pypi.org/legacy/ dist/*
+
+release: clean test dist
 	$(VENV_ACTIVATE); twine upload dist/*
 
 bump: $(VENV)
