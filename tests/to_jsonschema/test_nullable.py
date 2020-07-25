@@ -23,3 +23,21 @@ def test_handles_nullable():
         "type": 'string'
     }
     assert result == expected
+
+
+def test_nullable_oneOf_anyOf():
+    # https://github.com/pglass/py-openapi-schema-to-json-schema/issues/10
+    for key in ['oneOf', 'anyOf']:
+        schema = {
+            key: [{"type": "string"}],
+            "nullable": True,
+        }
+        result = convert(schema)
+        expected = {
+            "$schema": 'http://json-schema.org/draft-04/schema#',
+            key: [
+                {"type": "string"},
+                {"type": "null"},
+            ]
+        }
+        assert result == expected

@@ -162,6 +162,12 @@ def convertTypes(schema, options):
     toDateTime = options['dateToDateTime']
 
     if schema.get('type') is None:
+        # https://github.com/pglass/py-openapi-schema-to-json-schema/issues/10
+        if schema.get('nullable') is True:
+            for struct in ['oneOf', 'anyOf']:
+                if struct in schema:
+                    schema[struct].append({'type': 'null'})
+
         return schema
 
     if (schema.get('type') == 'string' and schema.get('format') == 'date'

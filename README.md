@@ -34,7 +34,8 @@ about the problem.
 ## Features
 
 * converts OpenAPI 3.0 Schema Object to JSON Schema Draft 4
-* deletes `nullable` and adds `"null"` to `type` array if `nullable` is `true`
+* deletes `nullable` and adds `"null"` to `type` array if `nullable` is `true` and `type` is present
+* adds `{"type": "null"}` to `oneOf` or `anyOf` array if `nullable` is `true` and `type` is _not_ present
 * supports deep structures with nested `allOf`s etc.
 * removes [OpenAPI specific
   properties](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.0.md#fixed-fields-20)
